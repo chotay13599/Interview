@@ -25,7 +25,7 @@
                         <small><strong>Status</strong></small>
                         <br>
                         @if ($item->publish == 1)
-                            <div class="badge badge-secondary text-success">Avaliable</div>
+                            <div class="badge badge-secondary text-dark">Avaliable</div>
                         @else
                         <div class="badge badge-warning text-danger">Unavaliable</div>
                         @endif
@@ -44,13 +44,11 @@
                           {{-- <h5 class="card-title">Con</h5> --}}
                           <p class="card-text">Name : {{$item->owner}}</p>
                           <p class="card-text">Phone : {{$item->phone}}</p>
+                          <p class="card-text">Address : {{$item->address}}</p>
+
                           {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
                         </div>
-                    </div>
-
-
-
-                    
+                    </div>                  
             </div>
 
             <div class="col-6 mt-3">
@@ -58,20 +56,47 @@
                     <label for="" class="form-label">Map</label>
                    <div class="row">
                         <div class="col-md-6">
-                            <input type="text" name="lat" id="lat" class="form-control" placeholder="lat" value="{{$item->lat}}">
+                            <input type="text" name="lat" id="lat" class="form-control" value="{{$item->lat}}">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" name="lng" id="lng" class="form-control" placeholder="lng" value="{{$item->lng}}">
+                            <input type="text" name="lng" id="lng" class="form-control" value="{{$item->lng}}">
                         </div>
                    </div>
-                   <div id="map" style="height:400px"></div>
-                   {{-- <div class="row mt-3">
-                    <div class="col-md" id="map" style="height:400px;">
-
-                    </div>
-                   </div> --}}
+                   <div id="item_map" style="height:400px"></div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+
+        function initMap() {
+                        let map = new google.maps.Map(document.getElementById("item_map"), {
+                            center: {lat: 21.9162,lng: 95.9560},
+                            zoom: 5,
+                            scrollwheel: true,
+                        });
+                        const uluru = {lat: 21.9162 ,lng:95.9560};
+                        let marker = new google.maps.Marker({
+                            position: uluru,
+                            map: map,
+                            draggable: true
+                        });
+                        google.maps.event.addListener(marker,'position_changed',
+                            function (){
+                                let lat = marker.position.lat()
+                                let lng = marker.position.lng()
+                                $('#lat').val(lat)
+                                $('#lng').val(lng)
+                            })
+                        google.maps.event.addListener(map,'click',
+                        function (event){
+                            pos = event.latLng
+                            marker.setPosition(pos)
+                        })
+                    }
+
+        
+        // console.log(location1);
+        initMap();
+    </script>
 @endsection

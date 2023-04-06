@@ -162,29 +162,15 @@
                                 </div>
                                </div>
                             </div>
-
-
-
                         </div>
-
-
                     </div>
                     
-                    
-
-
-
                     <div class="row">
                         <div class="col-md-6">
                             <button type="submit" class="btn btn-success">Add</button>
                         </div>
                     </div>
                 </form>
-            
-        
-
-
-
     </div>
 </main>
 

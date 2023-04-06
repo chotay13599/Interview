@@ -47,7 +47,7 @@
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                         <p class="text-right">{{ count($category->items)}} Products</p>
                         <a href="#products" class="cat-img position-relative overflow-hidden mb-3">
-                            <img class="img-fluid" src="img/{{$category->img}}" alt="" style="width:auto">
+                            <img class="img-fluid" src="{{ asset('img/'.$category->img) }}" alt="" style="width:auto">
                         </a>
                         <h5 class="font-weight-semi-bold m-0">{{$category->name}}</h5>
 
@@ -74,7 +74,7 @@
             </div>
             <div class="col-md-6 pb-4">
                 <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
-                    <img src="img/offer-2.png" alt="">
+                    <img src="{{public_path('img/offer-2.png')}}" alt="">
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Winter Collection</h1>
@@ -94,27 +94,29 @@
         </div>
         <div class="row px-xl-5 pb-3">
             @foreach ($items as $item)
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="img/{{ $item->img }}" alt="">
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3">{{ $item->item }}</h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>{{ $item->price }} MMK</h6>
+            @if ($item->publish == 1)
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="{{ asset('img/'.$item->img) }}" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">{{ $item->item }}</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>{{ $item->price }} MMK</h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-center bg-light border">
+                            <a href="{{ route('item-info.show', $item->id) }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                            {{-- <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> --}}
                         </div>
                     </div>
-                    <div class="card-footer d-flex justify-content-center bg-light border">
-                        <a href="{{ route('item-info.show', $item->id) }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                        {{-- <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> --}}
-                    </div>
                 </div>
-            </div>
+            @endif
             @endforeach
 
         </div>
-        {{-- <button id="showMoreButton" class="btn btn-primary">Show more</button> --}}
+        {{-- <a id="showMoreButton"  class="btn btn-primary">Show more</a> --}}
 
     </div>
     <!-- Products End -->

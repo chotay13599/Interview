@@ -78,6 +78,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="{{asset('lib/easing/easing.min.js')}}"></script>
 <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" type="text/javascript"></script>
+
 
 <!-- Contact Javascript File -->
 <script src="mail/jqBootstrapValidation.min.js"></script>
@@ -114,10 +116,8 @@
                         })
                     }
         initMap();
-
-        
- 
 </script>
+
 </body>
 
 </html>
