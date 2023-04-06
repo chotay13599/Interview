@@ -18,15 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', function () {
-    return view('welcome');
+// Route::get('/items', function () {
+//     return view('item');
+// })->name('items');
+Route::group(['prefix' => 'client'],function(){
+    Route::resource('/',HomeController::class);
 });
-
-Route::get('/', function () {
-    return view('index');
-})->name('index');
-
-Route::resource('/',HomeController::class);
 
 Auth::routes();
 
